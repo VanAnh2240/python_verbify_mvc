@@ -69,7 +69,6 @@ class CustomerController:
 
     def get_cart_total(self, cart_id):
         """Tính tổng giá trị giỏ hàng"""
-        # Cập nhật tổng trước khi lấy
         self.cart_model.update_cart_total(cart_id)
         return self.cart_model.get_cart_total(cart_id)
 

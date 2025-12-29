@@ -157,5 +157,5 @@ class AdminView:
             f"Tổng doanh thu: {report['total_revenue']:,.0f} VNĐ\n"
             f"Sách bán ít nhất: {least_book[0]} ({least_book[1]} cuốn)\n"
             f"Sách bán nhiều nhất: {most_book[0]} ({most_book[1]} cuốn)\n"
-            f"Khách hàng mua nhiều nhất: {top_cust[0]} - {top_cust[1]} {top_cust[2]} ({top_cust[3]:,.0f} VNĐ)"
+            f"Khách hàng chi tiêu nhiều nhất: {top_cust[0]} -  {top_cust[2]} {top_cust[1]} ({top_cust[3]:,.0f}  VNĐ)"
         )
