@@ -1,7 +1,6 @@
 USE master;
 GO
 
--- Drop database if exists
 IF EXISTS (SELECT name FROM sys.databases WHERE name = 'verbify')
 BEGIN
     ALTER DATABASE verbify SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
@@ -9,16 +8,11 @@ BEGIN
 END
 GO
 
--- Create database
 CREATE DATABASE verbify;
 GO
 
 USE verbify;
 GO
-
--- --------------------------------------------------------
--- Table structure for table genres
--- --------------------------------------------------------
 
 CREATE TABLE GENRES (
     GENRE_ID INT IDENTITY(1,1) PRIMARY KEY,
@@ -26,9 +20,6 @@ CREATE TABLE GENRES (
 );
 GO
 
--- --------------------------------------------------------
--- Table structure for table book
--- --------------------------------------------------------
 
 CREATE TABLE BOOK (
     BOOK_ID INT IDENTITY(1,1) PRIMARY KEY,
@@ -54,9 +45,6 @@ CREATE TABLE BOOK_BELONG (
 );
 GO
 
--- --------------------------------------------------------
--- Table structure for table customer
--- --------------------------------------------------------
 
 CREATE TABLE CUSTOMER (
     CUSTOMER_ID INT IDENTITY(1,1) PRIMARY KEY,
@@ -65,14 +53,11 @@ CREATE TABLE CUSTOMER (
     PHONE_NUMBER NVARCHAR(15) NULL,
     FIRST_NAME NVARCHAR(50) NULL,
     LAST_NAME NVARCHAR(50) NULL,
-    ADDRESS NVARCHAR(300) NULL, 
+    ADDRESS NVARCHAR(300) NULL,
     IS_ADMIN BIT NOT NULL DEFAULT 0
 );
 GO
 
--- --------------------------------------------------------
--- Table structure for table cart
--- --------------------------------------------------------
 
 CREATE TABLE CART (
     CART_ID INT IDENTITY(1,1) PRIMARY KEY,
@@ -83,9 +68,6 @@ CREATE TABLE CART (
 );
 GO
 
--- --------------------------------------------------------
--- Table structure for table CART_ITEM
--- --------------------------------------------------------
 
 CREATE TABLE CART_ITEM (
     CART_ITEM_ID INT IDENTITY(1,1) PRIMARY KEY,
@@ -99,9 +81,6 @@ CREATE TABLE CART_ITEM (
 );
 GO
 
--- --------------------------------------------------------
--- Table structure for table ORDERS
--- --------------------------------------------------------
 
 CREATE TABLE ORDERS (
     ORDER_ID INT IDENTITY(1,1) PRIMARY KEY,
@@ -115,10 +94,6 @@ CREATE TABLE ORDERS (
 );
 GO
 
--- --------------------------------------------------------
--- Table structure for table ORDER_ITEM
--- --------------------------------------------------------
-
 CREATE TABLE ORDER_ITEM (
     ORDER_ITEM_ID INT IDENTITY(1,1) PRIMARY KEY,
     ORDER_ID INT NOT NULL,
@@ -131,9 +106,6 @@ CREATE TABLE ORDER_ITEM (
 );
 GO
 
--- --------------------------------------------------------
--- Insert sample data
--- --------------------------------------------------------
 INSERT INTO GENRES (GENRES_NAME) VALUES
 (N'Tâm lý học'),
 (N'Triết học'),
@@ -151,8 +123,6 @@ INSERT INTO GENRES (GENRES_NAME) VALUES
 (N'Văn học thiếu nhi'),
 (N'Sách giáo khoa');
 GO
-
--- Insert sample books
 
 SET IDENTITY_INSERT BOOK ON;
 GO
@@ -197,43 +167,100 @@ GO
 
 INSERT INTO CUSTOMER (CUSTOMER_ID, USERNAME, PASSWORD, PHONE_NUMBER, FIRST_NAME, LAST_NAME, ADDRESS, IS_ADMIN) VALUES
 (1, 'admin', 'admin', '0901234567', N'Admin', N'', N'123 Nguyễn Huệ, Quận 1, TP.HCM', 1),
-(2, 'nguyenvana', 'Pass@123', '0912345678', N'An', N'Nguyễn Văn', N'456 Lê Lợi, Quận 3, TP.HCM', 0),
-(3, 'tranthib', 'Pass@456', '0923456789', N'Bình', N'Trần Thị', N'789 Trần Hưng Đạo, Quận 5, TP.HCM', 0),
-(4, 'lethic', 'Pass@789', '0934567890', N'Chi', N'Lê Thị', N'321 Võ Văn Kiệt, Quận 1, TP.HCM', 0),
-(5, 'phamvand', 'Pass@012', '0945678901', N'Dũng', N'Phạm Văn', N'654 Nguyễn Thị Minh Khai, Quận 3, TP.HCM', 0);
+(2, 'vananh', 'vananh', '0912345678', N'Anh', N'Đinh Vân', N'236 Phạm Ngọc Thạnh, Quận 12, TP.HCM', 0),
+(3, 'nguyenvana', 'Pass@123', '0912345678', N'An', N'Nguyễn Văn', N'456 Lê Lợi, Quận 3, TP.HCM', 0),
+(4, 'tranthib', 'Pass@456', '0923456789', N'Bình', N'Trần Thị', N'789 Trần Hưng Đạo, Quận 5, TP.HCM', 0),
+(5, 'lethic', 'Pass@789', '0934567890', N'Chi', N'Lê Thị', N'321 Võ Văn Kiệt, Quận 1, TP.HCM', 0),
+(6, 'phamvand', 'Pass@012', '0945678901', N'Dũng', N'Phạm Văn', N'654 Nguyễn Thị Minh Khai, Quận 3, TP.HCM', 0);
 
 SET IDENTITY_INSERT CUSTOMER OFF;
 GO
 
 INSERT INTO BOOK_BELONG (BOOK_ID, GENRE_ID) VALUES
-(1, 12), (1, 4),  
-(2, 4), (2, 2),   
-(3, 12), (3, 1),  
-(4, 3), (4, 2),   
-(5, 12),          
-(6, 13), (6, 12), 
-(7, 12), (7, 1),  
-(8, 2), (8, 4),   
-(9, 1), (9, 12),  
-(10, 2),          
+(1, 12), (1, 4),
+(2, 4), (2, 2),
+(3, 12), (3, 1),
+(4, 3), (4, 2),
+(5, 12),
+(6, 13), (6, 12),
+(7, 12), (7, 1),
+(8, 2), (8, 4),
+(9, 1), (9, 12),
+(10, 2),
 (11, 12), (11, 13),
-(12, 1), (12, 12), 
-(13, 12), (13, 1), 
-(14, 4),            
-(15, 4), (15, 14),  
-(16, 4), (16, 14),  
-(17, 4), (17, 14),  
-(18, 13), (18, 12), 
-(19, 1), (19, 9),   
-(20, 1),            
-(21, 12), (21, 13), 
-(22, 2), (22, 4),   
-(23, 12),           
-(24, 13), (24, 12), 
-(25, 4), (25, 14), 
-(26, 13), (26, 12), 
-(27, 13), (27, 12), 
-(28, 1), (28, 12),  
-(29, 12), (29, 1),  
-(30, 1), (30, 12);  
+(12, 1), (12, 12),
+(13, 12), (13, 1),
+(14, 4),
+(15, 4), (15, 14),
+(16, 4), (16, 14),
+(17, 4), (17, 14),
+(18, 13), (18, 12),
+(19, 1), (19, 9),
+(20, 1),
+(21, 12), (21, 13),
+(22, 2), (22, 4),
+(23, 12),
+(24, 13), (24, 12),
+(25, 4), (25, 14),
+(26, 13), (26, 12),
+(27, 13), (27, 12),
+(28, 1), (28, 12),
+(29, 12), (29, 1),
+(30, 1), (30, 12);
 GO
+
+SET IDENTITY_INSERT CART ON;
+GO
+
+INSERT INTO CART (CART_ID, CUSTOMER_ID, TOTAL_QUANTITY, TOTAL_PRICE) VALUES
+(1, 2, 0, 0), 
+(2, 2, 0, 0),
+(3, 3, 0, 0),
+(4, 4, 0, 0),
+(5, 5, 0, 0);
+
+SET IDENTITY_INSERT CART OFF;
+GO
+
+INSERT INTO CART_ITEM (CART_ID, BOOK_ID, QUANTITY, SUBTOTAL) VALUES
+(2, 1, 1, 86000),
+(2, 2, 2, 158000),
+
+(3, 15, 1, 98000),
+(3, 16, 1, 102000),
+
+(4, 30, 1, 145000),
+
+(5, 6, 1, 125000),
+(5, 11, 1, 148000);
+GO
+
+SET IDENTITY_INSERT ORDERS ON;
+GO
+
+INSERT INTO ORDERS(ORDER_ID, CUSTOMER_ID, ORDER_DATE, DELIVERY_ADDRESS, PAYMENT_STATUS, TOTAL_PRICE, PAYMENT_TYPE)
+VALUES
+(1, 2, GETDATE()-3, N'456 Lê Lợi, Quận 3, TP.HCM', 'PAID',   244000, 'COD'),
+(2, 3, GETDATE()-2, N'789 Trần Hưng Đạo, Quận 5, TP.HCM', 'PAID',   200000, 'Momo'),
+(3, 4, GETDATE()-1, N'321 Võ Văn Kiệt, Quận 1, TP.HCM', 'UNPAID', 145000, 'VNPay'),
+(4, 5, GETDATE(),   N'654 Nguyễn Thị Minh Khai, Quận 3, TP.HCM', 'PAID', 273000, 'Bank Transfer');
+
+SET IDENTITY_INSERT ORDERS OFF;
+GO
+
+
+INSERT INTO ORDER_ITEM
+(ORDER_ID, BOOK_ID, QUANTITY, UNIT_PRICE, SUBTOTAL)
+VALUES
+(1, 1, 1, 86000, 86000),
+(1, 2, 2, 79000, 158000),
+
+(2, 15, 1, 98000, 98000),
+(2, 16, 1, 102000, 102000),
+
+(3, 30, 1, 145000, 145000),
+
+(4, 6, 1, 125000, 125000),
+(4, 11, 1, 148000, 148000);
+GO
+
