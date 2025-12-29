@@ -8,25 +8,25 @@ class AdminView:
 
         result = self.controller.login(username, password)
         if result:
-            print("Đăng nhập thành công")
+            print("Đăng nhập thành công!")
             return True
         else:
-            print("Đăng nhập thất bại! Sai username hoặc password.")
+            print("Đăng nhập thất bại! Sai username hoặc password!")
             return False
 
     def show_menu(self):
         while True:
             print("\n========== ADMIN MENU ==========")
-            print("1. Xem thong tin tai khoan")
-            print("2. Xem danh sach sach")
-            print("3. Them sach")
-            print("4. Cap nhat sach")
-            print("5. Xoa sach")
-            print("6. Xem bao cao")
-            print("0. Dang xuat")
+            print("1. Xem thông tin tài khỏan")
+            print("2. Xem danh sách sách")
+            print("3. Thêm sách")
+            print("4. Cập nhật sách")
+            print("5. Xóa sách")
+            print("6. Xem báo cáo")
+            print("0. Đăng xuất")
             print("=" * 33)
 
-            choice = input("Chon chuc nang: ")
+            choice = input("Chọn chức năng: ")
 
             if choice == '1':
                 print(self.view_account_info())
@@ -47,7 +47,7 @@ class AdminView:
                 print(self.view_report())
 
             elif choice == '0':
-                return "Đã đăng xuất"
+                return "Đã đăng xuất!"
 
             else:
                 print("Lựa chọn không hợp lệ")
@@ -68,15 +68,15 @@ class AdminView:
 
     def add_book(self):
         try:
-            name = input("Ten sach: ")
+            name = input("Tên sách: ")
             isbn = input("ISBN: ")
-            author = input("Tac gia: ")
-            language = input("Ngon ngu: ")
-            release_year = int(input("Nam xuat ban: "))
-            description = input("Mo ta: ")
-            page_quantity = int(input("So trang: "))
-            price = float(input("Gia: "))
-            stock_quantity = int(input("So luong ton kho: "))
+            author = input("Tác gi: ")
+            language = input("Ngôn ngữ: ")
+            release_year = int(input("Năm xuất bản: "))
+            description = input("Mô tả: ")
+            page_quantity = int(input("Sô trang: "))
+            price = float(input("Gía: "))
+            stock_quantity = int(input("Sô lượng tôn kho: "))
 
             result = self.controller.add_book(
                 name, isbn, author, language,
@@ -84,21 +84,20 @@ class AdminView:
                 page_quantity, price, stock_quantity
             )
             if result:
-                return "Thêm sách thành công"
-            return "Thêm sách thất bại"
+                return "Thêm sách thành công!"
+            return "Thêm sách thất bại!"
         except ValueError:
-            return "Dữ liệu nhập không hợp lệ"
+            return "Dữ liệu nhập không hợp lệ!"
 
     def update_book(self):
         try:
             book_id = int(input("Nhập ID sách cần cập nhật (0 để hủy): "))
             if book_id == 0:
-                return "Đã hủy cập nhật"
+                return "Đã hủy cập nhật!"
 
-            # Lấy thông tin sách hiện tại
             book = self.controller.get_book_detail(book_id)
             if not book:
-                return "Không tìm thấy sách"
+                return "Không tìm thấy sách!"
 
             print(f"\nThông tin hiện tại: {book[1]} - Giá: {book[8]:,}đ")
             print("(Để giữ nguyên giá trị, nhấn Enter)\n")
@@ -128,23 +127,23 @@ class AdminView:
                     description, page_quantity,
                     price, stock_quantity
             ):
-                return "Cập nhật sách thành công"
+                return "Cập nhật sách thành công!"
             else:
-                return "Cập nhật sách thất bại"
+                return "Cập nhật sách thất bại!"
         except ValueError:
-            return "Dữ liệu nhập không hợp lệ"
+            return "Dữ liệu nhập không hợp lệ!"
 
     def delete_book(self):
         books = self.controller.get_all_books()
         if not books:
-            return "Không có sách để xóa"
-        book_id = int(input("Nhap ID sach muon xoa (0 de huy): "))
+            return "Không có sách để xóa!"
+        book_id = int(input("Nhập ID sách muốn xóa (0 để hủy): "))
         if book_id == 0:
-            return ("Đã hủy xóa")
+            return ("Đã hủy xóa!")
 
         if self.controller.delete_book(book_id):
-            return "Xóa sách thành công"
-        return "Xóa sách thất bại"
+            return "Xóa sách thành công!"
+        return "Xóa sách thất bại!"
 
     def view_report(self):
         report = self.controller.get_report()

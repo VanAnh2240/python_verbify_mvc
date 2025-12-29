@@ -1,5 +1,5 @@
-from DoAn.Model.Customer import Customer
-from DoAn.Model.Book import Book
+from Model.Customer import Customer
+from Model.Book import Book
 
 
 class GuestController:

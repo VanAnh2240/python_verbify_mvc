@@ -1,6 +1,6 @@
-from DoAn.Model.Customer import Customer
-from DoAn.Model.Book import Book
-from DoAn.Model.Order import Order
+from Model.Customer import Customer
+from Model.Book import Book
+from Model.Order import Order
 
 
 class AdminController:

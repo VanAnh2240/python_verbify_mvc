@@ -1,11 +1,11 @@
 import os
-from DoAn.MSSQLConnection import MSSQLConnection
-from DoAn.Controller.AdminController import AdminController
-from DoAn.Controller.CustomerController import CustomerController
-from DoAn.Controller.GuestController import GuestController
-from DoAn.View.AdminView import AdminView
-from DoAn.View.CustomerView import CustomerView
-from DoAn.View.GuestView import GuestView
+from MSSQLConnection import MSSQLConnection
+from Controller.AdminController import AdminController
+from Controller.CustomerController import CustomerController
+from Controller.GuestController import GuestController
+from View.AdminView import AdminView
+from View.CustomerView import CustomerView
+from View.GuestView import GuestView
 
 
 def show_main_menu():

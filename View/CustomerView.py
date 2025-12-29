@@ -129,33 +129,33 @@ class CustomerView:
                 print(self.pay_order())
 
             elif choice == '0':
-                return "Đã đăng xuất"
+                return "Đã đăng xuất!"
             else:
-                print("Lựa chọn không hợp lệ")
+                print("Lựa chọn không hợp lệ!")
 
     def view_account_info(self):
         info = self.controller.get_account_info()
         if not info:
-            return "Không có thông tin tài khoản"
+            return "Không có thông tin tài khoản!"
         return f"ID: {info[0]} | Username: {info[1]} | Họ tên: {info[4]} {info[5]} | SĐT: {info[3]} | Địa chỉ: {info[6]}"
 
     def view_all_books(self):
         books = self.controller.get_all_books()
         if not books:
-            return "Không có sách"
+            return "Không có sách!"
         return books
 
     def search_books(self):
         keyword = input("Nhập từ khóa: ")
         books = self.controller.search_books(keyword)
         if not books:
-            return "Không tìm thấy sách"
+            return "Không tìm thấy sách!"
         return books
 
     def filter_books_by_genre(self):
         genres = self.controller.get_all_genres()
         if not genres:
-            return "Không có thể loại"
+            return "Không có thể loại!"
         print("\n=== DANH SÁCH THỂ LOẠI ===")
         for genre in genres:
             print(f"{genre[0]}. {genre[1]}")
@@ -163,7 +163,7 @@ class CustomerView:
             genre_id = int(input("Chọn ID thể loại: "))
             books = self.controller.get_books_by_genre(genre_id)
             if not books:
-                return "Không có sách thuộc thể loại này"
+                return "Không có sách thuộc thể loại này!"
             return books
         except:
             return "ID không hợp lệ"
@@ -173,15 +173,15 @@ class CustomerView:
             book_id = int(input("Nhập ID sách: "))
             book = self.controller.get_book_detail(book_id)
             if not book:
-                return "Không tìm thấy sách"
+                return "Không tìm thấy sách!"
             return f"ID: {book[0]} | Tên: {book[1]} | ISBN: {book[2]} | Tác giả: {book[3]} | Ngôn ngữ: {book[4]} | Năm XB: {book[5]} | Mô tả: {book[6]} | Số trang: {book[7]} | Giá: {book[8]:,}đ | Kho: {book[9]}"
         except:
-            return "ID không hợp lệ"
+            return "ID không hợp lệ!"
 
     def view_all_carts(self):
         carts = self.controller.get_all_carts()
         if not carts:
-            return "Không có giỏ hàng"
+            return "Không có giỏ hàng!"
         return carts
 
     def view_cart_items(self):
@@ -189,7 +189,7 @@ class CustomerView:
             cart_id = int(input("Nhập ID giỏ hàng: "))
             items = self.controller.get_cart_items(cart_id)
             if not items:
-                return "Giỏ hàng trống"
+                return "Giỏ hàng trống!"
 
             print("\n-----CHI TIẾT GIỎ HÀNG")
             for item in items:
@@ -203,13 +203,13 @@ class CustomerView:
                     break
             return ""
         except:
-            return "ID không hợp lệ"
+            return "ID không hợp lệ!"
 
     def create_cart(self):
         cart_id = self.controller.create_cart()
         if cart_id:
             return f"Tạo giỏ hàng thành công! Mã giỏ hàng: {cart_id}"
-        return "Không thể tạo giỏ hàng"
+        return "Không thể tạo giỏ hàng!"
 
     def add_to_cart(self):
         cart_id = int(input("Nhập ID giỏ hàng: "))
@@ -227,7 +227,7 @@ class CustomerView:
             # Hiển thị chi tiết giỏ hàng trước
             items = self.controller.get_cart_items(cart_id)
             if not items:
-                return "Giỏ hàng trống"
+                return "Giỏ hàng trống!"
 
             print("\n=== CHI TIẾT GIỎ HÀNG ===")
             for item in items:
@@ -237,21 +237,21 @@ class CustomerView:
             total = self.controller.get_cart_total(cart_id)
             return f"TỔNG GIÁ TRỊ GIỎ HÀNG: {total:,}đ"
         except:
-            return "ID không hợp lệ"
+            return "ID không hợp lệ!"
 
     def delete_cart(self):
         try:
             cart_id = int(input("Nhập ID giỏ hàng: "))
             if self.controller.delete_cart(cart_id):
-                return "Đã xóa giỏ hàng"
-            return "Xóa thất bại"
+                return "Đã xóa giỏ hàng!"
+            return "Xóa thất bại!"
         except:
-            return "ID không hợp lệ"
+            return "ID không hợp lệ!"
 
     def view_all_orders(self):
         orders = self.controller.get_all_orders()
         if not orders:
-            return "Không có đơn hàng"
+            return "Không có đơn hàng!"
         return orders
 
     def view_order_items(self):
@@ -259,10 +259,10 @@ class CustomerView:
             order_id = int(input("Nhập ID đơn hàng: "))
             items = self.controller.get_order_items(order_id)
             if not items:
-                return "Đơn hàng trống"
+                return "Đơn hàng trống!"
             return items
         except:
-            return "ID không hợp lệ"
+            return "ID không hợp lệ!"
 
     def create_order(self):
         try:
@@ -272,21 +272,21 @@ class CustomerView:
             order_id = self.controller.create_order(cart_id, address, payment)
             if order_id:
                 return f"Tạo đơn hàng thành công! Mã đơn hàng: {order_id}"
-            return "Tạo đơn hàng thất bại"
+            return "Tạo đơn hàng thất bại!"
         except:
-            return "Dữ liệu không hợp lệ"
+            return "Dữ liệu không hợp lệ!"
 
     def view_unpaid_orders(self):
         orders = self.controller.get_unpaid_orders()
         if not orders:
-            return "Không có đơn chưa thanh toán"
+            return "Không có đơn chưa thanh toán!"
         return orders
 
     def pay_order(self):
         try:
             order_id = int(input("Nhập ID đơn hàng: "))
             if self.controller.pay_order(order_id):
-                return "Thanh toán thành công"
-            return "Thanh toán thất bại"
+                return "Thanh toán thành công!"
+            return "Thanh toán thất bại!"
         except:
-            return "ID không hợp lệ"
+            return "ID không hợp lệ!"

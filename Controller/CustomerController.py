@@ -1,7 +1,7 @@
-from DoAn.Model.Customer import Customer
-from DoAn.Model.Book import Book
-from DoAn.Model.Cart import Cart
-from DoAn.Model.Order import Order
+from Model.Customer import Customer
+from Model.Book import Book
+from Model.Cart import Cart
+from Model.Order import Order
 
 
 class CustomerController:
